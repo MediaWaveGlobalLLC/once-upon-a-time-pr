@@ -42,8 +42,8 @@
   --space-32: 8rem;
 
   --container-max: 1240px;
-  --radius-sm: 4px;
-  --radius-md: 10px;
+  --radius-sm: 2px;
+  --radius-md: 3px;
 
   --ease-quiet: cubic-bezier(0.22, 0.61, 0.36, 1);
   --dur-slow: 900ms;

@@ -129,12 +129,12 @@
   gap: var(--space-2);
   min-height: 44px;
   padding: var(--space-3) var(--space-6);
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   font-weight: 600;
   font-size: var(--fs-small);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
   border: 1px solid transparent;
-  transition: transform var(--dur-fast) var(--ease-quiet), background var(--dur-fast) var(--ease-quiet), border-color var(--dur-fast) var(--ease-quiet);
+  transition: background var(--dur-fast) var(--ease-quiet), border-color var(--dur-fast) var(--ease-quiet), color var(--dur-fast) var(--ease-quiet);
 }
 
 .btn--primary {
@@ -142,19 +142,29 @@
   color: var(--color-black);
 }
 
-.btn--primary:hover { background: var(--color-gold-light); transform: translateY(-1px); }
+.btn--primary::after {
+  content: '\2192';
+  display: inline-block;
+  transition: transform var(--dur-fast) var(--ease-quiet);
+}
+
+.btn--primary:hover { background: var(--color-gold-light); }
+.btn--primary:hover::after { transform: translateX(3px); }
 
 .btn--secondary {
   background: transparent;
   color: var(--color-cream);
-  border-color: rgba(247, 240, 225, 0.35);
+  border: none;
+  border-bottom: 1px solid rgba(247, 240, 225, 0.4);
+  border-radius: 0;
+  padding-inline: var(--space-1);
 }
 
 .btn--secondary:hover { border-color: var(--color-gold); color: var(--color-gold-light); }
 
 .on-paper .btn--secondary {
   color: var(--color-black);
-  border-color: rgba(11, 11, 12, 0.3);
+  border-bottom-color: rgba(11, 11, 12, 0.35);
 }
 
 /* ---------- Hero ---------- */
@@ -343,6 +353,8 @@
 .brand-card--paper .brand-card__chapter { color: #9a7414; }
 
 .brand-card__media {
+  display: block;
+  width: 100%;
   position: relative;
   margin-block: var(--space-6);
   border-radius: var(--radius-sm);
@@ -350,6 +362,11 @@
   aspect-ratio: 16 / 10;
   background: rgba(0,0,0,0.2);
   cursor: pointer;
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
 }
 
 .brand-card--paper .brand-card__media { background: rgba(11,11,12,0.04); }
@@ -382,7 +399,7 @@
   color: rgba(247, 240, 225, 0.6);
   background: rgba(0,0,0,0.35);
   padding: var(--space-1) var(--space-2);
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
 }
 
 .brand-card--paper .brand-card__media-hint {
@@ -466,10 +483,10 @@
 
 /* ---------- Events ---------- */
 .events-card {
-  border: 1px dashed rgba(201, 162, 39, 0.4);
-  border-radius: var(--radius-md);
-  padding: var(--space-12);
+  border-left: 2px solid var(--color-gold);
+  padding: var(--space-8) var(--space-8) var(--space-8) var(--space-6);
   margin-top: var(--space-8);
+  background: linear-gradient(90deg, rgba(201,162,39,0.05), transparent 40%);
 }
 
 .events-card__title {
