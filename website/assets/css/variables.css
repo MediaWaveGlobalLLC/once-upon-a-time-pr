@@ -1,0 +1,54 @@
+:root {
+  /* Color — pulled from the client's own logos, not a template default */
+  --color-black: #0b0b0c;
+  --color-black-soft: #16140f;
+  --color-gold: #c9a227;
+  --color-gold-light: #f1d68c;
+  --color-rose: #d98a9e;
+  --color-cream: #f7f0e1;
+  --color-cream-dim: #ece2cc;
+
+  --color-ink: var(--color-black);
+  --color-paper: var(--color-cream);
+
+  /* Type */
+  --font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --font-body: 'Poppins', system-ui, -apple-system, sans-serif;
+
+  --fs-eyebrow: 0.8125rem;
+  --fs-small: 0.9375rem;
+  --fs-body: 1.0625rem;
+  --fs-h3: clamp(1.5rem, 1.1rem + 1.6vw, 2.1rem);
+  --fs-h2: clamp(2rem, 1.3rem + 2.8vw, 3.25rem);
+  --fs-hero: clamp(2.75rem, 1.6rem + 4.8vw, 5.5rem);
+  --fs-story: clamp(1.5rem, 1.1rem + 1.6vw, 2.25rem);
+
+  --lh-tight: 1.05;
+  --lh-snug: 1.25;
+  --lh-body: 1.65;
+
+  --tracking-wide: 0.14em;
+
+  /* Spacing (4/8 rhythm) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  --container-max: 1240px;
+  --radius-sm: 4px;
+  --radius-md: 10px;
+
+  --ease-quiet: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --dur-slow: 900ms;
+  --dur-med: 500ms;
+  --dur-fast: 220ms;
+
+  --focus-ring: 0 0 0 3px rgba(201, 162, 39, 0.55);
+}
