@@ -42,11 +42,11 @@
     revealEls.forEach(function (el) { io.observe(el); });
   }
 
-  // Brand card media: play the "coming to life" clip on view, toggle on click
-  var mediaButtons = document.querySelectorAll('.brand-card__media[data-video]');
+  // Negocio slides: play the "coming to life" clip on view, toggle on click
+  var mediaButtons = document.querySelectorAll('.slider__media[data-video]');
   mediaButtons.forEach(function (btn) {
     var video = btn.querySelector('video');
-    var hint = btn.querySelector('.brand-card__media-hint');
+    var hint = btn.querySelector('.slider__media-hint');
 
     var play = function () {
       if (reduceMotion) return;
@@ -76,6 +76,60 @@
       }, { threshold: 0.6 });
       io.observe(btn);
     }
+  });
+
+  // Negocios slider: arrows + dots drive the native scroll-snap track
+  document.querySelectorAll('[data-slider]').forEach(function (root) {
+    var track = root.querySelector('[data-slider-track]');
+    var prevBtn = root.querySelector('[data-slider-prev]');
+    var nextBtn = root.querySelector('[data-slider-next]');
+    var dotsWrap = root.querySelector('[data-slider-dots]');
+    var slides = track ? Array.prototype.slice.call(track.children) : [];
+    if (!track || slides.length === 0) return;
+
+    var dots = slides.map(function (_, i) {
+      var dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'slider__dot';
+      dot.setAttribute('aria-label', 'Ir al negocio ' + (i + 1));
+      dot.addEventListener('click', function () { scrollToSlide(i); });
+      dotsWrap.appendChild(dot);
+      return dot;
+    });
+
+    function activeIndex() {
+      var pos = track.scrollLeft;
+      var closest = 0;
+      var min = Infinity;
+      slides.forEach(function (slide, i) {
+        var d = Math.abs(slide.offsetLeft - track.offsetLeft - pos);
+        if (d < min) { min = d; closest = i; }
+      });
+      return closest;
+    }
+
+    function refresh() {
+      var idx = activeIndex();
+      dots.forEach(function (dot, i) { dot.classList.toggle('is-active', i === idx); });
+      prevBtn.disabled = track.scrollLeft <= 4;
+      nextBtn.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 4;
+    }
+
+    function scrollToSlide(i) {
+      var target = slides[Math.max(0, Math.min(slides.length - 1, i))];
+      track.scrollTo({ left: target.offsetLeft - track.offsetLeft, behavior: reduceMotion ? 'auto' : 'smooth' });
+    }
+
+    prevBtn.addEventListener('click', function () { scrollToSlide(activeIndex() - 1); });
+    nextBtn.addEventListener('click', function () { scrollToSlide(activeIndex() + 1); });
+
+    var scrollTimer;
+    track.addEventListener('scroll', function () {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(refresh, 100);
+    }, { passive: true });
+
+    refresh();
   });
 
   // Contact form: compose a mailto (no backend on this static site)
